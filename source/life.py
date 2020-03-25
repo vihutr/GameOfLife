@@ -2,6 +2,7 @@ import numpy as np
 
 rows = 5
 columns = 5
+# rows = int(input("Enter the rows in the grid: "))
 # columns = int(input("Enter the columns in the grid: "))
 # grid = Init(rows, columns)
 
@@ -11,12 +12,11 @@ def Main():
     global rows
     global columns
 
-    rows = int(input("Enter the rows in the grid: "))
 
-    grid = [[0,0,0,0,0],
+    grid = [[1,1,1,0,0],
             [0,1,1,0,0],
-            [0,1,1,0,0],
-            [0,0,0,0,0],
+            [0,0,0,1,1],
+            [0,0,0,1,1],
             [0,0,0,0,0]]
 
     print("First Generation")
@@ -50,16 +50,21 @@ def CheckRules(grid, x, y):
     global rows
     global columns
     # Count live cells adjacent to current cell
-    print("Coord: " + str(x) + "," + str(y))
+    # print("")
+    # print("Coord: " + str(x) + "," + str(y))
     adjCnt = 0
     for i in range(x-1, x+2):
-        if(0 < i < x):
+        if(0 <= i < rows):
             for j in range (y-1, y+2):
-                print("i: " + str(i))
-                print("j: " + str(j))
-                if (grid[i][j] == 1 or grid[i][j] == 2) and (x != i and y != j) :
-                    adjCnt += 1
-                    print("adjcnt++: " + str(adjCnt))
+                if(0 <= j < columns):
+                    # print("i: " + str(i) + " j: " + str(j))
+                    # print("grid[i][j]: " + str(grid[i][j]))
+                    # print("x != i: " + str(x != i))
+                    # print("y != j: " + str(y != j))
+                    # print("x != i and y != j: " + str(x != i or y != j))
+                    if (grid[i][j] == 1 or grid[i][j] == 2) and (x != i or y != j) :
+                        adjCnt += 1
+                        #print("adjcnt++: " + str(adjCnt))
 
     # Any live cell with 2 or 3 neighbors survives
     # Any dead cell with three live neighbors becomes a live cell
@@ -75,10 +80,8 @@ def CheckRules(grid, x, y):
     # 3 = marked to live
 
     if grid[x][y] == 0 and adjCnt == 3:
-        print(adjCnt)
         grid[x][y] = 3
     elif grid[x][y] == 1 and (adjCnt < 2 or adjCnt > 3):
-        print(adjCnt)
         grid[x][y] = 2
     else:
         pass
