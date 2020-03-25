@@ -1,30 +1,41 @@
 import numpy as np
 
-rows = 5
-columns = 5
+rows = 17
+columns = 17
 # rows = int(input("Enter the rows in the grid: "))
 # columns = int(input("Enter the columns in the grid: "))
 # grid = Init(rows, columns)
 
-cellsAlive = [(2,3)]
+# to be implemented: signify points manually, probably will just add a ui for ease of testing
+# cellsAlive = [(2,3)]
 
 def Main():
     global rows
     global columns
 
-
-    grid = [[1,1,1,0,0],
-            [0,1,1,0,0],
-            [0,0,0,1,1],
-            [0,0,0,1,1],
-            [0,0,0,0,0]]
+    grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],
+            [0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],
+            [0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0],
+            [0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0],
+            [0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+            [0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0],
+            [0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0],
+            [0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],
+            [0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],]
 
     print("First Generation")
     Display(grid, rows, columns)
-    Life(grid, rows, columns)
-    Display(grid, rows, columns)
-
-
+    for i in range(5):
+        Life(grid, rows, columns)
+        Display(grid, rows, columns)
 
 def Init(rows, columns):
     return np.zeros ((rows, columns))
@@ -32,15 +43,16 @@ def Init(rows, columns):
 def Display(grid, rows, columns):
     for i in range(rows):
         for j in range(columns):
-            print(int(grid[i][j]), end ="" , flush=True),
-        print("")
+            if(int(grid[i][j]) == 0):
+                print(' ', end ='  ' , flush=True)
+            elif(int(grid[i][j]) == 1):
+                print('*', end = '  ')
+        print()
 
 def Life(grid, rows, columns):
     for i in range(rows):
         for j in range(columns):
             CheckRules(grid, i, j)
-    print("Checked Rules")
-    Display(grid, rows, columns)
     for i in range(rows):
         for j in range(columns):
             ApplyRules(grid, i, j)
