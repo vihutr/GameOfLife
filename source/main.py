@@ -6,7 +6,7 @@ from life import Life
 
 def main():
 
-    grid = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    grid1 = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1],
             [1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1],
             [1,1,1,1,1,1,2,2,1,1,1,2,2,1,1,1,1,1,1],
@@ -24,11 +24,21 @@ def main():
             [1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],]
 
-    screen_height = 17
-    screen_width = 19
-    rows = 17
-    columns = 19
-    window_title = "Conaway's Game of Life in Python w/ tcod"
+    grid2 = [[1,1,1,1,1,1,1],
+            [1,2,2,2,1,2,1],
+            [1,2,1,1,1,1,1],
+            [1,1,1,1,2,2,1],
+            [1,1,2,2,1,2,1],
+            [1,2,1,2,1,2,1],
+            [1,1,1,1,1,1,1]]
+
+    grid = grid2
+
+    screen_height = len(grid)
+    screen_width = len(grid[0])
+    rows = len(grid)
+    columns = len(grid[0])
+    window_title = "Conway's Game of Life in Python w/ tcod"
 
     libtcod.console_set_custom_font('./textures/terminal8x8_gs_asx4.png', libtcod.FONT_LAYOUT_ASCII_INROW)
     libtcod.console_init_root(screen_width, screen_height, window_title, False)
@@ -77,6 +87,6 @@ def render_all(con, cursor, grid, rows, columns):
             elif(int(grid[y][x]) == 2):
                 libtcod.console_set_default_foreground(0, libtcod.white)
                 libtcod.console_put_char(0, x, y, 2, libtcod.BKGND_NONE)
-                
+
 if __name__ == '__main__':
     main()
