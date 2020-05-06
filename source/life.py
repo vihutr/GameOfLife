@@ -1,4 +1,10 @@
 import numpy as np
+
+from time import time
+
+start_time = time()
+
+
 #int zeroes for custom grid width/height ?
 def Init(rows, columns):
     return np.zeros ((rows, columns))
@@ -89,7 +95,7 @@ def life_run():
     print("First Generation")
     Display(grid, rows, columns)
 
-    for i in range(5):
+    for _ in range(5):
         Life(grid, rows, columns)
         Display(grid, rows, columns)
 
@@ -105,3 +111,7 @@ def Display(grid, rows, columns):
 
 if __name__ == '__main__':
     life_run()
+
+passed_time = time() - start_time
+
+print(f"It took {passed_time}")
