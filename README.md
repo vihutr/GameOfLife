@@ -1,4 +1,5 @@
-Basic implementation of Conway's Game of Life using libtcod-rl
+Basic implementation of Conway's Game of Life using libtcod
+
 venv recommended
 
 freeze to Requirements/install from respectively
